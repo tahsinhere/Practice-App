@@ -3,6 +3,7 @@ import { SearchBar } from "./components/SearchBar";
 import { Header } from "./components/header";
 import { SearchButton } from "./components/button";
 import { MainDisplay } from "./components/mainDisplay";
+import { ToggleFahrenheit } from "./components/tempSwtichButton";
 
 function App() {
   const [userInput, setUserInput] = useState("");
@@ -10,6 +11,7 @@ function App() {
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [place, setPlace] = useState(false);
+  const [fahren, setFahren] = useState(false);
 
   function saveUserInput(event) {
     setUserInput(event.target.value);
@@ -51,7 +53,9 @@ function App() {
       setLoading(false);
     }
   };
-
+  function ToggleFahren() {
+    setFahren((prev) => !prev);
+  }
   const onEnterkey = (event) => {
     if (event.key === "Enter") geoData();
   };
@@ -65,6 +69,7 @@ function App() {
         error={error}
         isLoading={isLoading}
         place={place}
+        fahren={fahren}
       />
 
       <SearchBar
@@ -74,6 +79,10 @@ function App() {
       />
 
       <SearchButton onClick={geoData} />
+      <ToggleFahrenheit
+        fahren={fahren}
+        onClick={ToggleFahren}
+      ></ToggleFahrenheit>
     </div>
   );
 }

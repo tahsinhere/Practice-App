@@ -1,4 +1,4 @@
-export function MainDisplay({ temp, error, place, isLoading }) {
+export function MainDisplay({ temp, error, place, isLoading, fahren }) {
   return (
     <div className="bg-white/10 backdrop-blur-md border border-white/20 p-10 rounded-3xl shadow-2xl max-w-md w-2xl text-center transition-all  ">
       {temp && place?.results?.[0] && (
@@ -10,7 +10,9 @@ export function MainDisplay({ temp, error, place, isLoading }) {
           <h2 className="text-3xl font-bold">{place.results[0].name}</h2>
 
           <div className="text-4xl font-extrabold  text-transparent bg-clip-text bg-linear-to-b from-white to-white/50">
-            {temp.current.temperature_2m}°C
+            {fahren
+              ? `${((temp.current.temperature_2m * 9) / 5 + 32).toFixed(1)}°F`
+              : `${temp.current.temperature_2m}°C`}
           </div>
         </div>
       )}
